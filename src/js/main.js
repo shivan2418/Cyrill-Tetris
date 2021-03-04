@@ -3,10 +3,46 @@ const { Game } = require('./classes/game.js');
 const { getRandomInt, random_choice, setCookie } = require("./classes/utility");
 var $ = require("jquery");
 
-  //DOM Manipulation
+//DOM Manipulation
+
+function _start_exam(){
+    $("#exam_mode").addClass('active');
+    $("#endless_mode").removeClass('active');
+    $('#syllabus').hide();
+    $("#points").hide()
+    $("#choose_exam").hide('fast');
+    $('#exams').show('fast');
+
+    // clear data
+    window.game.blocks = [];
+    $('#canvas .canvas_letter').each( (index,letter) => {
+        $(letter).addClass('cleared');
+        $(letter).remove();
+    });
+     
+    window.game.current_mode = 'exam';
+}
+
+function start_exam_all_letters(){
+    _start_exam();
+    set_full_syllabus();
+    $('#alphabet_full').show('fast');
+    $('#alphabet_hard_only').hide('fast');
+    window.game._reset_exam_progress();
+}
+
+function start_exam_hard_only(){
+    _start_exam();
+    set_hard_only_syllabus();
+    $('#alphabet_full').hide('fast');
+    $('#alphabet_hard_only').show('fast');
+    window.game._reset_exam_progress();
+
+}
 
 // Event handlers
 function _correct_input(char, block) {
+
     try {
         return block.reading === char;
     } catch {
@@ -30,10 +66,20 @@ function evaluate_input(e) {
             let letter = $('#canvas div:not(.cleared)').first();
 
             if (correct) {
-                window.game.endless_points++;
+                if (window.game.current_mode==='exam'){
+                    window.game._increase_progress(letter.text());
+
+                }else{
+                    window.game.endless_points++;
+                }
+                
             } else {
-                if (window.game.endless_points > 0) {
-                    window.game.endless_points--;
+                if (window.game.current_mode==='exam'){
+                    window.game._decrease_progress(letter.text());
+                }else{
+                    if (window.game.endless_points > 0) {
+                        window.game.endless_points--;
+                    }
                 }
                 Game.show_wrong_answer_hint(block.letter);
             }
@@ -42,6 +88,10 @@ function evaluate_input(e) {
             letter.addClass('cleared');
             if (window.game.letters_on_screen>=1){
                 window.game.letters_on_screen--;
+            }
+            // if there are no more letters on the screen set the delay so that a new one can be added at once
+            if (window.game.letters_on_screen===0){
+                window.game.last_block_added_time= (Math.floor(Date.now() / 1000))-1000;
             }
                 window.game.update_state();
         }
@@ -75,24 +125,25 @@ function show_exams() {
 }
 
 function toggle_exam() {
-    $("#exam_mode").addClass('active');
-    $("#endless_mode").removeClass('active');
-    $("#exams").show();
+
+    $("#choose_exam").show('fast');
+    $("#exams").hide();
     $('#syllabus').hide();
     $("#points").hide()
-    window.game.current_mode = 'exam';
 
 }
 
 function set_full_syllabus(){
     //Selects what syllabus to use (what letters to pick form for challenge)
     window.game._set_syllabus(ALL_LETTERS_FULL);
+    window.game.current_exam='alphabet_full';
     $('#btn_alphabet_full').addClass('active');
     $('#btn_alphabet_hard_only').removeClass('active');
 }
 
 function set_hard_only_syllabus(){
     window.game._set_syllabus(ALL_LETTERS_HARD_ONLY);
+    window.game.current_exam='alphabet_hard_only';
     $('#btn_alphabet_full').removeClass('active');
     $('#btn_alphabet_hard_only').addClass('active');
 }
@@ -111,6 +162,9 @@ function toggle_syllabus(){
 
 function pause_game() {
     window.game.pause_game();
+
+
+
 }
 
 //add event listeners
@@ -126,6 +180,8 @@ document.getElementById('btn_alphabet_hard_only').addEventListener('click',set_h
 document.getElementById('syllabus_btn').addEventListener('click', toggle_syllabus);
 document.getElementById("letter_input").addEventListener('keydown', evaluate_input);
 
+document.getElementById("start_exam_all_letters").addEventListener('click', start_exam_all_letters);
+document.getElementById("start_exam_hard_only").addEventListener('click', start_exam_hard_only);
 
 
 $(document).ready(function () {

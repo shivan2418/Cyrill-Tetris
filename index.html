@@ -35,13 +35,20 @@
       </div>
       <div id="menu" class='col-12 col-md-3 order-md-1'>
 
+        <div id="choose_exam">
+          <span>Select what exam to Take</span>
+          <button id='start_exam_all_letters' class='btn btn-primary'>All letters</button>
+          <button id='start_exam_hard_only' class='btn btn-primary'>Only letters not same as the lation one</button>
+        </div>
+
         <div id="syllabus">
-          <button class="btn btn-primary syllabus_btn active" id="btn_alphabet_full">Full alphabet</button>
-          <button class="btn btn-primary syllabus_btn"  id="btn_alphabet_hard_only">Foreign only</button>
+          <button class="btn btn-primary syllabus_btn active" id="btn_alphabet_full">Full alphabet
+          </button>
+          <button data-tooltip='Only letters that are not the same as western letters' class="btn btn-primary syllabus_btn"  id="btn_alphabet_hard_only">Foreign only</button>
         </div>
 
         <div id='commands'>
-          <button id="show_exams" class="btn btn-primary">Show exam</button>
+          <button id="show_exams" class="btn btn-primary">Show exams</button>
           <button id="endless_mode" class="active btn btn-primary">Endless mode</button>
           <button id="exam_mode" class="inactive btn btn-primary">Take exam</button>
           <button id="syllabus_btn" class="btn btn-primary">Syllabus</button>

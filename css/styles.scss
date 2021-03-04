@@ -10,8 +10,6 @@ $hangul_row_bg_color:$main_bg_color;
 html,body {
   background-color:$main_bg_color;
 }
-body{
-}
 
 .hangul_container {
   background-color: $hangul_container_bg_color;
@@ -133,13 +131,6 @@ table{
   color: black;
   z-index: 0;
 
-  .alive{
-  
-  }
-  
-  .dead{
-  
-  }
 
   &.cleared{
     
@@ -153,7 +144,7 @@ table{
 div.red_text {
   transition-property: color;
   transition-timing-function: ease;
-  transition-duration: 2000ms;
+  transition-duration: 3500ms;
   color:red;
 }
 
@@ -176,10 +167,16 @@ div.red_text {
   display: inline-block;
 
   &.passed{
+    transition-property: background-color;
+    transition-duration: 500ms;
+    transition-timing-function:linear;
     background-color: green;
   }
 
   &.failed{
+    transition-property: background-color;
+    transition-duration: 500ms;
+    transition-timing-function:linear;
     background-color: red;
   }
 
@@ -187,10 +184,8 @@ div.red_text {
 
 #exams{
 
-  #exams {
-    background-color: $main_bg_color;
-    display: none;
-  }
+  background-color: $main_bg_color;
+  display: none;
 
   .exam{
     background-color: lightblue;
@@ -216,8 +211,20 @@ div.red_text {
     border-width: 3px;
     border-color: black;
   }
-
 }
+
+#choose_exam{
+  span{
+    margin: 5px 5px 5px 5px;
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  display: none;
+  background-color: cadetblue;
+  margin-bottom: 0.5rem;
+}
+
 
 #commands{
   background-color: cadetblue;
@@ -225,8 +232,5 @@ div.red_text {
   button.active{
     border-width: 3px;
     border-color: black;
-  
-}
-
-
+  }
 }

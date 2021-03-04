@@ -126,8 +126,8 @@ div.red_text {
   transition-property: color;
   -webkit-transition-timing-function: ease;
           transition-timing-function: ease;
-  -webkit-transition-duration: 2000ms;
-          transition-duration: 2000ms;
+  -webkit-transition-duration: 3500ms;
+          transition-duration: 3500ms;
   color: red;
 }
 
@@ -151,14 +151,26 @@ div.red_text {
 }
 
 .exam_box.passed {
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
   background-color: green;
 }
 
 .exam_box.failed {
+  -webkit-transition-property: background-color;
+  transition-property: background-color;
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
   background-color: red;
 }
 
-#exams #exams {
+#exams {
   background-color: #17315c;
   display: none;
 }
@@ -192,6 +204,18 @@ div.red_text {
 #syllabus button.active {
   border-width: 3px;
   border-color: black;
+}
+
+#choose_exam {
+  display: none;
+  background-color: cadetblue;
+  margin-bottom: 0.5rem;
+}
+
+#choose_exam span {
+  margin: 5px 5px 5px 5px;
+  color: white;
+  font-size: 1.2rem;
 }
 
 #commands {
