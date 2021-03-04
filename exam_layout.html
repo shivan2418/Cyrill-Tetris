@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam layout</title>
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <script>var STARTING_CONS_HAN_ROM = {
+            ㄱ: "g",
+            ㄴ: "n",
+            ㄷ: "d",
+            ㄹ: "l",
+            ㅁ: "m",
+            ㅂ: "b",
+            ㅅ: "s",
+            ㅇ: "-",
+            ㅈ: "j",
+            ㅊ: "ch",
+            ㅋ: "k",
+            ㅌ: "t",
+            ㅍ: "p",
+            ㅎ: "h",
+        };
+
+        var STARTING_CONS_ROM_HAN = {
+            g: "ㄱ",
+            n: "ㄴ",
+            d: "ㄷ",
+            l: "ㄹ",
+            m: "ㅁ",
+            b: "ㅂ",
+            s: "ㅅ",
+            "-": "ㅇ",
+            j: "ㅈ",
+            ch: "ㅊ",
+            k: "ㅋ",
+            t: "ㅌ",
+            p: "ㅍ",
+            h: "ㅎ",
+        };
+
+        var STARTING_CONS_HAN = [
+            "ㄱ",
+            "ㄴ",
+            "ㄷ",
+            "ㄹ",
+            "ㅁ",
+            "ㅂ",
+            "ㅅ",
+            "ㅇ",
+            "ㅈ",
+            "ㅊ",
+            "ㅋ",
+            "ㅌ",
+            "ㅍ",
+            "ㅎ",
+        ];
+
+
+        var VOWE_HAN_ROM = {
+            ㅏ: "a",
+            ㅑ: "ya",
+            ㅓ: "eo",
+            ㅕ: "yeo",
+            ㅗ: "o",
+            ㅛ: "yo",
+            ㅜ: "u",
+            ㅠ: "yu",
+            ㅡ: "eu",
+            ㅣ: "i",
+        };
+
+        var VOWE_ROM_HAN = {
+            a: "ㅏ",
+            ya: "ㅑ",
+            eo: "ㅓ",
+            yeo: "ㅕ",
+            o: "ㅗ",
+            yo: "ㅛ",
+            u: "ㅜ",
+            yu: "ㅠ",
+            eu: "ㅡ",
+            i: "ㅣ",
+        };
+
+        var VOWE_HAN = ["ㅏ", "ㅑ", "ㅓ", "ㅕ", "ㅗ", "ㅛ", "ㅜ", "ㅠ", "ㅡ", "ㅣ"];
+
+        var HAN_ROM_READINGS = { ...VOWE_HAN_ROM, ...STARTING_CONS_HAN_ROM }
+        var ROM_HAN_READINGS = { ...VOWE_ROM_HAN, ...STARTING_CONS_ROM_HAN }
+        var ALL_JAMO = [...STARTING_CONS_HAN, ...VOWE_HAN]
+
+        var all_readings = { ...STARTING_CONS_HAN_ROM, ...VOWE_HAN_ROM };
+
+
+        function create_exam(exam_name, hangul) {
+            base = `<div class="exam">`;
+            hangul.forEach((jamo_div) => {
+                base += `<span id=${jamo_div}></span><div class="exam_item">${jamo_div}</div><div class="passfail" id='${jamo_div}0'></div><div class="passfail" id='${jamo_div}1'></div><div class="passfail" id='${jamo_div}2'></div>`;
+            });
+            base+=`</div>`;
+            $(`#${exam_name}`).append(base);
+        }
+
+
+        create_exam('main',VOWE_HAN)
+
+    </script>
+
+    <div id='main'>
+
+
+    </div>
+
+    <div>
+        <div>ㅏ</div><div class="exam_box"></div><div class="exam_box"></div><div class="exam_box"></div>
+
+
+    </div>
+
+
+</body>
+
+</html>

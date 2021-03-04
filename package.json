@@ -1,0 +1,30 @@
+{
+  "name": "hangul-tetris",
+  "version": "0.0.1",
+  "description": "A purely CSS, HTML and JS based Tetris game for learning Hangul",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "watchify -v --debug ./src/js/main.js -o ./dist/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivan2418/Hangul-Tetris.git"
+  },
+  "keywords": [
+    "hangul",
+    "korean",
+    "tetris"
+  ],
+  "author": "Emil Elgaard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivan2418/Hangul-Tetris/issues"
+  },
+  "homepage": "https://github.com/shivan2418/Hangul-Tetris#readme",
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "jquery": "^3.5.1",
+    "watchify": "^3.11.1"
+  }
+}

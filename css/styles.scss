@@ -1,0 +1,202 @@
+$main_bg_color:rgba(23, 49, 92,1);
+
+$hangul_container_bg_color:$main_bg_color;
+$canvas_wrapper_bg_color:$main_bg_color;
+$canvas_bg_color:#fff;
+$input_wrapper_bg_color:$main_bg_color;
+$menu_bg_color:$main_bg_color;
+$hangul_row_bg_color:$main_bg_color;
+
+html,body {
+  background-color:$main_bg_color;
+}
+body{
+}
+
+.hangul_container {
+  background-color: $hangul_container_bg_color;
+  height: 90%;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+#canvas_wrapper {
+  background-color: $canvas_wrapper_bg_color;
+}
+
+$canvas_max_width:500px;
+
+#canvas {
+  background-color: $canvas_bg_color;
+  position: relative;
+  height: 90%;
+  min-height: 70%;
+  max-width: $canvas_max_width;
+  margin-top: 0.5rem;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  border-radius: 0.5rem;
+  z-index:1;
+}
+
+#input_wrapper{
+  max-width: $canvas_max_width;
+  background-color: $input_wrapper_bg_color;
+  margin: auto;
+  position: relative;
+  padding-top: 0.5rem;;
+}
+
+#points {
+  color: wheat;
+  position: absolute;
+  font-size: 1.5rem;
+  right: 77%;
+  display: inline-block;
+}
+
+#letter_input {
+  position: absolute;;
+  width: 50%;
+  right: 25%;
+  display: inline-block;
+}
+
+#wrong_answer_hint{
+  display: none;
+  position: absolute;
+  background-color: red;
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-color: red;
+  width: 50%;
+  left: 25%;
+  z-index: 2;
+  top: 12%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  text-align: center;
+  font-size: 3rem;
+}
+
+#wrong_answer_hint::first-letter{
+  font-weight: bold;
+}
+
+
+@media (max-width: 767px) {
+  #menu {
+    height: 15vh;
+  }
+
+  #canvas_wrapper {
+    height: 65vh;
+  }
+  .hide{
+    display:none;
+  }
+
+}
+
+#menu {
+  background-color: $main_bg_color;
+}
+
+#commands {
+  background-color: cadetblue;
+}
+
+#exams {
+  background-color: lightblue;
+  display: none;
+}
+
+table{
+  .exam {
+    border-spacing: 0.25rem;
+    border-collapse: separate;
+    line-height: 1;
+    /* display: none; */
+  }
+  
+}
+
+.hangul_row {
+  background-color: $main_bg_color;
+  height: 95vh;
+}
+
+.hangul_col {
+  background-color: red;
+}
+
+
+
+.canvas_jamo {
+  // font-family: 'Nanum Gothic Coding', monospace;
+  position: absolute;
+  right:-100px;
+  font-size: 3rem;
+  color: black;
+  z-index: 0;
+
+  .alive{
+  
+  }
+  
+  .dead{
+  
+  }
+
+}
+div.red_text {
+  color:red;
+}
+
+.btn{
+  margin: 5px 5px 5px 5px;
+}
+
+.exam_row{
+  margin-left: 0.5rem;
+}
+
+.exam_item{
+  display: inline;
+}
+
+.exam_box{
+  border-radius: 3px;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+
+  &.passed{
+    background-color: green;
+  }
+
+  &.failed{
+    background-color: red;
+  }
+
+}
+
+#exams{
+  #alphabet{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+
+#commands{
+  button.active{
+    border-width: 3px;
+    border-color: black;
+  
+}
+
+
+}

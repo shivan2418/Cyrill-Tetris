@@ -1,0 +1,170 @@
+html, body {
+  background-color: #17315c;
+}
+
+.hangul_container {
+  background-color: #17315c;
+  height: 90%;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+#canvas_wrapper {
+  background-color: #17315c;
+}
+
+#canvas {
+  background-color: #fff;
+  position: relative;
+  height: 90%;
+  min-height: 70%;
+  max-width: 500px;
+  margin-top: 0.5rem;
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+  border-radius: 0.5rem;
+  z-index: 1;
+}
+
+#input_wrapper {
+  max-width: 500px;
+  background-color: #17315c;
+  margin: auto;
+  position: relative;
+  padding-top: 0.5rem;
+}
+
+#points {
+  color: wheat;
+  position: absolute;
+  font-size: 1.5rem;
+  right: 77%;
+  display: inline-block;
+}
+
+#letter_input {
+  position: absolute;
+  width: 50%;
+  right: 25%;
+  display: inline-block;
+}
+
+#wrong_answer_hint {
+  display: none;
+  position: absolute;
+  background-color: red;
+  border-radius: 0.3rem;
+  border-style: solid;
+  border-color: red;
+  width: 50%;
+  left: 25%;
+  z-index: 2;
+  top: 12%;
+  padding-top: 10%;
+  padding-bottom: 10%;
+  text-align: center;
+  font-size: 3rem;
+}
+
+#wrong_answer_hint::first-letter {
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  #menu {
+    height: 15vh;
+  }
+  #canvas_wrapper {
+    height: 65vh;
+  }
+  .hide {
+    display: none;
+  }
+}
+
+#menu {
+  background-color: #17315c;
+}
+
+#commands {
+  background-color: cadetblue;
+}
+
+#exams {
+  background-color: lightblue;
+  display: none;
+}
+
+table .exam {
+  border-spacing: 0.25rem;
+  border-collapse: separate;
+  line-height: 1;
+  /* display: none; */
+}
+
+.hangul_row {
+  background-color: #17315c;
+  height: 95vh;
+}
+
+.hangul_col {
+  background-color: red;
+}
+
+.canvas_jamo {
+  position: absolute;
+  right: -100px;
+  font-size: 3rem;
+  color: black;
+  z-index: 0;
+}
+
+div.red_text {
+  color: red;
+}
+
+.btn {
+  margin: 5px 5px 5px 5px;
+}
+
+.exam_row {
+  margin-left: 0.5rem;
+}
+
+.exam_item {
+  display: inline;
+}
+
+.exam_box {
+  border-radius: 3px;
+  height: 12px;
+  width: 12px;
+  display: inline-block;
+}
+
+.exam_box.passed {
+  background-color: green;
+}
+
+.exam_box.failed {
+  background-color: red;
+}
+
+#exams #alphabet {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+#commands button.active {
+  border-width: 3px;
+  border-color: black;
+}
+/*# sourceMappingURL=styles.css.map */
