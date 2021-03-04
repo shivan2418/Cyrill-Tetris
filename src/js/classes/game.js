@@ -1,52 +1,69 @@
 const { LetterBlock } = require("./letter_block.js");
-const { ALL_LETTERS, RU_TO_LAT } = require("../alphabet.js");
+const { ALL_LETTERS_FULL,ALL_LETTERS_HARD_ONLY, RU_TO_LAT_FULL } = require("../alphabet.js");
 const { XCOLS, COL_WIDTH, ROW_HEIGHT, YROWS } = require('../settings.js');
 const { setCookie, getRandomInt, random_choice } = require('./utility');
+const {BLOCK_SPEED,HINT_DELAY,HINT_FADEIN,HINT_FADEOUT} = require('../settings.js');
 
 class Game {
 
-    running = false;
-    endless_points = 0;
-    block_speed = 10000;
-    blocks = [];
-    current_mode = 'endless';
-    blocks_seen = 0;
-    round = 0;
-  
-    last_block_added_time = null;
-    last_blocked_added_in_round = 0;
-    
-    // Constants
-    MAX_BLOCKS_ON_SCREEN = 5; // max blocks at once on screen
-    NEW_BLOCK_DELAY = 3; // second delay between adding new blocsk
-  
-    shown_blocks_endless = {}
+    constructor(){
 
-  show_wrong_answer_hint(letter) {
+      this.running = false;
+      this.endless_points = 0;
+      this.block_speed = BLOCK_SPEED;
+      this.blocks = [];
+      this.current_mode = 'endless';
+    
+      this.last_block_added_time = null;
+      this.last_blocked_added_in_round = 0;
+      
+      this.letters_on_screen=0;
+
+      //syllabus
+      this.syllabus = ALL_LETTERS_FULL;
+
+      // Constants
+      this.MAX_BLOCKS_ON_SCREEN = 5; // max blocks at once on screen
+      this.NEW_BLOCK_DELAY = 3; // second delay between adding new blocsk
+    
+      this.shown_blocks_endless = {}
+
+    }
+
+    
+
+  static show_wrong_answer_hint(letter) {
       //Show a hint with the jamo and the reading. 
-      $("#wrong_answer_hint").text(`${letter} : ${RU_TO_LAT[letter]}`);
-      $("#wrong_answer_hint").fadeIn(500).delay(500).fadeOut(500);
+      $("#wrong_answer_hint").text(`${letter} : ${RU_TO_LAT_FULL[letter]}`);
+      $("#wrong_answer_hint").fadeIn(HINT_FADEIN).delay(HINT_DELAY).fadeOut(HINT_FADEOUT);
   }
   
-
 
   move_latest_letter() {
     let canvas = $("#canvas");
     let letter = $("#canvas div:last-child");
+    let game = this;
     letter.animate(
       {
         top: `${canvas.height() - letter.height()}px`
       },
       {
-        'duration': this.block_speed, "complete": function () {
-          letters_on_screen--;
-          window.game.blocks.shift();
-          console.log(`letters on screen:${letters_on_screen}`)
-          window.game.show_wrong_answer_hint($(this).text());
-          $(this).remove();
+        'duration': game.block_speed, 
+        "done": function () {
+
+
+          // If this letter has already been cleared then just do nothing.
+          if (!$(this).hasClass('cleared')){
+            Game.show_wrong_answer_hint($(this).text());
+            game.letters_on_screen--;
+            game.blocks.shift();
+            
+          } 
+          $(this).remove();         
+          
         },
         'progress': function (animation, progress, msRemaining) {
-          if (msRemaining < this.block_speed/3 && !$(this).hasClass("red_text")) {
+          if (msRemaining < game.block_speed/3 && !$(this).hasClass("red_text")) {
             $(this).addClass('red_text')
           }
         },
@@ -59,11 +76,10 @@ class Game {
   add_letter_to_canvas(letter) {
     let new_letter_block = new LetterBlock(letter);
     this.blocks.push(new_letter_block);
-    console.log(this.blocks);
     this.last_block_added_time = Math.floor(Date.now() / 1000);
-    letters_on_screen++;
+    this.letters_on_screen++;
 
-    $('#canvas').append(`<div class='alive canvas_jamo'>${letter}</div>`)
+    $('#canvas').append(`<div class='alive canvas_letter'>${letter}</div>`)
 
     let new_letter = $("#canvas div:last-child");
     let canvas_width = $("#canvas").width();
@@ -81,12 +97,8 @@ class Game {
   }
 
 
-
-
-
-
   choose_new_block_endless() {
-    return random_choice(ALL_LETTERS);
+    return random_choice(this.syllabus);
 
   }
 
@@ -123,8 +135,6 @@ class Game {
     let letter = this.choose_new_block_endless();
     this.add_letter_to_canvas(letter);
 
-    this.last_blocked_added_in_round = this.round;
-
   }
 
   exam_main_loop() {
@@ -155,6 +165,11 @@ class Game {
     this.running ? $("#pause").val("Pause game") : $("#pause").val("Resume game");
     console.log(this.running);
   }
+
+  _set_syllabus(syl){
+    this.syllabus=syl;
+  }
+
 }
 
 module.exports = { Game };

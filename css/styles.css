@@ -87,15 +87,6 @@ html, body {
   background-color: #17315c;
 }
 
-#commands {
-  background-color: cadetblue;
-}
-
-#exams {
-  background-color: lightblue;
-  display: none;
-}
-
 table .exam {
   border-spacing: 0.25rem;
   border-collapse: separate;
@@ -112,7 +103,7 @@ table .exam {
   background-color: red;
 }
 
-.canvas_jamo {
+.canvas_letter {
   position: absolute;
   right: -100px;
   font-size: 3rem;
@@ -120,7 +111,23 @@ table .exam {
   z-index: 0;
 }
 
+.canvas_letter.cleared {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-transition-duration: 1s;
+          transition-duration: 1s;
+  opacity: 0;
+}
+
 div.red_text {
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;
+  -webkit-transition-duration: 2000ms;
+          transition-duration: 2000ms;
   color: red;
 }
 
@@ -129,7 +136,7 @@ div.red_text {
 }
 
 .exam_row {
-  margin-left: 0.5rem;
+  margin-left: 0;
 }
 
 .exam_item {
@@ -151,7 +158,13 @@ div.red_text {
   background-color: red;
 }
 
-#exams #alphabet {
+#exams #exams {
+  background-color: #17315c;
+  display: none;
+}
+
+#exams .exam {
+  background-color: lightblue;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -161,6 +174,28 @@ div.red_text {
           flex-direction: row;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+}
+
+#syllabus {
+  background-color: cadetblue;
+  display: none;
+  margin-bottom: 0.5rem;
+}
+
+#syllabus button.active {
+  border-width: 3px;
+  border-color: black;
+}
+
+#commands {
+  background-color: cadetblue;
 }
 
 #commands button.active {

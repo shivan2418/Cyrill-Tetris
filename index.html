@@ -14,8 +14,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
     crossorigin="anonymous"></script>
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap" rel="stylesheet">
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/styles.css" />
   <!-- Javascript -->
@@ -37,18 +35,25 @@
       </div>
       <div id="menu" class='col-12 col-md-3 order-md-1'>
 
+        <div id="syllabus">
+          <button class="btn btn-primary syllabus_btn active" id="btn_alphabet_full">Full alphabet</button>
+          <button class="btn btn-primary syllabus_btn"  id="btn_alphabet_hard_only">Foreign only</button>
+        </div>
+
         <div id='commands'>
           <button id="show_exams" class="btn btn-primary">Show exam</button>
           <button id="endless_mode" class="active btn btn-primary">Endless mode</button>
           <button id="exam_mode" class="inactive btn btn-primary">Take exam</button>
+          <button id="syllabus_btn" class="btn btn-primary">Syllabus</button>
           <button id="pause" class="btn btn-primary">Pause Game</button>
         </div>
 
         <div id='exams'>
-
-          <div id='alphabet'></div>
-          
+          <div class=exam id='alphabet_full'></div>
+          <div class=exam id='alphabet_hard_only'></div>
         </div>
+
+
 
       </div>
 

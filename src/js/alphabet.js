@@ -1,4 +1,4 @@
-var RU_TO_LAT = {
+var RU_TO_LAT_FULL = {
   "А": "A", "а": "a",
   "Б": "B", "б": "b",
   "В": "V", "в": "v",
@@ -34,7 +34,7 @@ var RU_TO_LAT = {
   "Я": "JA", "я": "ja",
 }
 
-var RU_TO_LAT = {
+var RU_TO_LAT_HARD_ONLY = {
   "Б": "B", "б": "b",
   "В": "V", "в": "v",
   "Г": "G", "г": "g",
@@ -65,7 +65,7 @@ var RU_TO_LAT = {
   "Я": "JA", "я": "ja",
 }
 
-ALL_LETTERS = Array.from(Object.keys(RU_TO_LAT));
-ALL_LETTERS = [ALL_LETTERS[0]];
+ALL_LETTERS_FULL = Array.from(Object.keys(RU_TO_LAT_FULL));
+ALL_LETTERS_HARD_ONLY = Array.from(Object.keys(RU_TO_LAT_HARD_ONLY));
 
-module.exports = {RU_TO_LAT,ALL_LETTERS};
+module.exports = {RU_TO_LAT_FULL,RU_TO_LAT_HARD_ONLY,ALL_LETTERS_FULL,ALL_LETTERS_HARD_ONLY};
