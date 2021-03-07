@@ -156,14 +156,16 @@ function toggle_endless() {
     window.game.current_mode = 'endless';
 }
 
+function toggle_speed(){
+    $("#speed_menu").toggle('fast');
+}
+
 function toggle_syllabus(){
     $("#syllabus").toggle('fast');
 }
 
 function pause_game() {
     window.game.pause_game();
-
-
 
 }
 
@@ -183,6 +185,14 @@ document.getElementById("letter_input").addEventListener('keydown', evaluate_inp
 document.getElementById("start_exam_all_letters").addEventListener('click', start_exam_all_letters);
 document.getElementById("start_exam_hard_only").addEventListener('click', start_exam_hard_only);
 
+document.getElementById("speed_btn").addEventListener('click',toggle_speed);
+
+
+$('.speed_btn').on('click',(e)=>{
+    let speed = $(e.target).data('speed');
+    window.game._set_blockspeed(speed);
+    $('#speed_menu').hide('fast');
+});
 
 $(document).ready(function () {
     load_exams();

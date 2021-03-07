@@ -87,6 +87,10 @@ html, body {
   background-color: #17315c;
 }
 
+#speed_menu {
+  display: none;
+}
+
 table .exam {
   border-spacing: 0.25rem;
   border-collapse: separate;

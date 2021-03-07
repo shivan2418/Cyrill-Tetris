@@ -212,6 +212,10 @@ class Game {
     this.syllabus=syl;
   }
 
+  _set_blockspeed(speed){
+    this.block_speed=speed;
+  }
+
   _reset_exam_progress(){
     //Takes the current syllabus and sets the counter of how many correct
     this.exam_progress={}
