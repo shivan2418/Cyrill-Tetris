@@ -80,7 +80,7 @@ function evaluate_input(e) {
                         window.game.endless_points--;
                     }
                 }
-                Game.show_wrong_answer_hint(block.letter);
+                window.game.show_wrong_answer_hint(block.letter);
             }
 
             window.game.blocks.shift();
@@ -192,6 +192,23 @@ $('.speed_btn').on('click',(e)=>{
     window.game._set_blockspeed(speed);
     $('#speed_menu').hide('fast');
 });
+
+$('#speed_custom').on('click',(e)=>{
+let speed = window.prompt('Enter how many seconds you have to answer');
+if (speed !==null && speed!=="" && parseFloat(speed)>=0.1);
+    window.game._set_blockspeed(parseFloat(speed)*1000);
+});
+
+$('#show_hints').on('change',(e)=>{
+    if ($("#show_hints").is(':checked')){
+        window.game.show_hints=true;
+    }else{
+        window.game.show_hints=false;
+    }
+
+    console.log(this.show_hints);
+})
+
 
 $(document).ready(function () {
     load_exams();

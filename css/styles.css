@@ -31,20 +31,25 @@ html, body {
   max-width: 500px;
   background-color: #17315c;
   margin: auto;
-  position: relative;
   padding-top: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-#points {
+#points, #block_speed {
   color: wheat;
-  position: absolute;
   font-size: 1.5rem;
   right: 77%;
   display: inline-block;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 #letter_input {
-  position: absolute;
   width: 50%;
   right: 25%;
   display: inline-block;

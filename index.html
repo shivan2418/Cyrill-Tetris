@@ -31,6 +31,7 @@
         <div id='input_wrapper'>
           <div id='points'>0</div>
           <input id='letter_input' type='text' />
+          <div id='block_speed'></div>
         </div>
       </div>
       <div id="menu" class='col-12 col-md-3 order-md-1'>
@@ -41,6 +42,7 @@
           <button class='speed_btn btn btn-primary' data-speed=7000>Normal (7s)</button>
           <button class='speed_btn btn btn-primary' data-speed=10000>Slow (10s)</button>
           <button class='speed_btn btn btn-primary' data-speed=12000>Very slow (12s)</button>
+          <button id='speed_custom' class='btn btn-primary'>Custom</button>
         </div>
 
         <div id="choose_exam">
@@ -62,7 +64,8 @@
           <button id="syllabus_btn" class="btn btn-primary">Syllabus</button>
           <button id="speed_btn" class="btn btn-primary">Adjust Speed</button>
           <button id='challenge_mode' class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Challenge mode</button>
-          <button id='show_hints' class='btn btn-primary'>Show hints</button>
+          <input type='checkbox' checked=true value="1" id='show_hints'>
+          <label for='showhints'>Show hints on failure</label>
           <button id="pause" class="btn btn-primary">Pause Game</button>
         </div>
 

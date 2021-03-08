@@ -38,7 +38,7 @@ class Game {
 
     
 
-  static show_wrong_answer_hint(letter) {
+  show_wrong_answer_hint(letter) {
     if(this.show_hints){
       //Show a hint with the jamo and the reading. 
       $("#wrong_answer_hint").text(`${letter} : ${RU_TO_LAT_FULL[letter]}`);
@@ -63,7 +63,7 @@ class Game {
           // If this letter has already been cleared then just do nothing.
           if (!$(this).hasClass('cleared')){
             
-            Game.show_wrong_answer_hint($(this).text());
+            game.show_wrong_answer_hint($(this).text());
             game.letters_on_screen--;
             game.blocks.shift();
             
@@ -139,7 +139,7 @@ class Game {
   // Game state
   update_state() {
     $("#points").text(`${this.endless_points}`);
-  
+    $('#block_speed').text(`${this.block_speed/1000}s`);
   }
 
 
@@ -199,6 +199,7 @@ class Game {
     if (!this.running) {
       // this.reset_game();
       this.running = true;
+      this.update_state();
     }
   }
   reset_game() {
@@ -225,6 +226,7 @@ class Game {
 
   _set_blockspeed(speed){
     this.block_speed=speed;
+    this.update_state();
   }
 
   _reset_exam_progress(){
