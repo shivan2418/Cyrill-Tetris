@@ -1,4 +1,4 @@
-const { RU_TO_LAT_FULL,RU_TO_LAT_HARD_ONLY, ALL_LETTERS_FULL,ALL_LETTERS_HARD_ONLY } = require('./alphabet.js');
+const { SYLLABUS_NAMES, SYLLABUS_DICT, RU_TO_LAT_FULL,RU_TO_LAT_HARD_ONLY, RUS_ALL_LETTERS_FULL,RUS_ALL_LETTERS_HARD_ONLY } = require('./alphabet.js');
 const { Game } = require('./classes/game.js');
 const { getRandomInt, random_choice, setCookie } = require("./classes/utility");
 var $ = require("jquery");
@@ -21,6 +21,11 @@ function _start_exam(){
     });
      
     window.game.current_mode = 'exam';
+}
+
+
+function start_exam(){
+
 }
 
 function start_exam_all_letters(){
@@ -98,13 +103,22 @@ function evaluate_input(e) {
 }
 
 function load_exams() {
-    //load from cookies
-    create_exam("alphabet_full", ALL_LETTERS_FULL);
-    create_exam("alphabet_hard_only", ALL_LETTERS_HARD_ONLY);
+
+    Object.entries(SYLLABUS_DICT).forEach(([key,value])=>{
+        create_exam(`${key}`,value);
+    });
 
 }
 
 function create_exam(exam_name, letters) {
+
+    //create button to select the exam
+    let new_exam_btn = `<button class="choose_exam btn btn-primary"  id="btn_${exam_name}" data-name="${SYLLABUS_NAMES[exam_name]}">${SYLLABUS_NAMES[exam_name]}</button>`;
+    $('#choose_exam').append(new_exam_btn);
+
+    // create div to hold the exam
+    let new_exam = `<div data-exam=${exam_name} id=${exam_name} class=exam></div>`;
+    $('#exams').append(new_exam);
 
     let base = "";
     letters.forEach((letter_div) => {
@@ -134,14 +148,14 @@ function toggle_exam() {
 
 function set_full_syllabus(){
     //Selects what syllabus to use (what letters to pick form for challenge)
-    window.game._set_syllabus(ALL_LETTERS_FULL);
+    window.game._set_syllabus(RUS_ALL_LETTERS_FULL);
     window.game.current_exam='alphabet_full';
     $('#btn_alphabet_full').addClass('active');
     $('#btn_alphabet_hard_only').removeClass('active');
 }
 
 function set_hard_only_syllabus(){
-    window.game._set_syllabus(ALL_LETTERS_HARD_ONLY);
+    window.game._set_syllabus(RUS_ALL_LETTERS_HARD_ONLY);
     window.game.current_exam='alphabet_hard_only';
     $('#btn_alphabet_full').removeClass('active');
     $('#btn_alphabet_hard_only').addClass('active');
@@ -180,9 +194,6 @@ document.getElementById('btn_alphabet_hard_only').addEventListener('click',set_h
 document.getElementById('syllabus_btn').addEventListener('click', toggle_syllabus);
 document.getElementById("letter_input").addEventListener('keydown', evaluate_input);
 
-document.getElementById("start_exam_all_letters").addEventListener('click', start_exam_all_letters);
-document.getElementById("start_exam_hard_only").addEventListener('click', start_exam_hard_only);
-
 document.getElementById("speed_btn").addEventListener('click',toggle_speed);
 
 document.getElementById("show_hints").addEventListener('click',show_hints)
@@ -197,6 +208,7 @@ $('#speed_custom').on('click',(e)=>{
 let speed = window.prompt('Enter how many seconds you have to answer');
 if (speed !==null && speed!=="" && parseFloat(speed)>=0.1);
     window.game._set_blockspeed(parseFloat(speed)*1000);
+    $("#speed_menu").hide('fast');
 });
 
 $('#show_hints').on('change',(e)=>{

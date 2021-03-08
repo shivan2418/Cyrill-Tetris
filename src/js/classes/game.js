@@ -1,5 +1,5 @@
 const { LetterBlock } = require("./letter_block.js");
-const { ALL_LETTERS_FULL,ALL_LETTERS_HARD_ONLY, RU_TO_LAT_FULL } = require("../alphabet.js");
+const { RUS_ALL_LETTERS_FULL,RUS_ALL_LETTERS_HARD_ONLY, RU_TO_LAT_FULL } = require("../alphabet.js");
 const { XCOLS, COL_WIDTH, ROW_HEIGHT, YROWS } = require('../settings.js');
 const { setCookie, getRandomInt, random_choice } = require('./utility');
 const {NEW_BLOCK_DELAY, BLOCK_SPEED,HINT_DELAY,HINT_FADEIN,HINT_FADEOUT} = require('../settings.js');
@@ -26,7 +26,7 @@ class Game {
       this.exam_progress={};
 
       //syllabus
-      this.syllabus = ALL_LETTERS_FULL;
+      this.syllabus = RUS_ALL_LETTERS_FULL;
 
       // Constants
       this.MAX_BLOCKS_ON_SCREEN = 5; // max blocks at once on screen
@@ -36,7 +36,6 @@ class Game {
 
     }
 
-    
 
   show_wrong_answer_hint(letter) {
     if(this.show_hints){

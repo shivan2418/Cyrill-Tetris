@@ -1,5 +1,5 @@
 // Represents a hangul or jamo on the board
-const {RU_TO_LAT_FULL,ALL_LETTERS_FULL} = require('../alphabet.js');
+const {RU_TO_LAT_FULL,RUS_ALL_LETTERS_FULL} = require('../alphabet.js');
 
 class LetterBlock{
     constructor(letter){
