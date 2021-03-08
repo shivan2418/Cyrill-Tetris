@@ -1,17 +1,17 @@
-$main_bg_color:rgba(23, 49, 92,1);
+$main_bg_color: rgba(23, 49, 92, 1);
 
-$hangul_container_bg_color:$main_bg_color;
-$canvas_wrapper_bg_color:$main_bg_color;
-$canvas_bg_color:#fff;
-$input_wrapper_bg_color:$main_bg_color;
-$menu_bg_color:$main_bg_color;
-$hangul_row_bg_color:$main_bg_color;
+$hangul_container_bg_color: $main_bg_color;
+$canvas_wrapper_bg_color: $main_bg_color;
+$canvas_bg_color: #fff;
+$input_wrapper_bg_color: $main_bg_color;
+$menu_bg_color: $main_bg_color;
+$hangul_row_bg_color: $main_bg_color;
 
-html,body {
-  background-color:$main_bg_color;
+html, body {
+  background-color: $main_bg_color;
 }
 
-.hangul_container {
+.letter_container {
   background-color: $hangul_container_bg_color;
   height: 90%;
   padding-top: 0.25rem;
@@ -22,7 +22,7 @@ html,body {
   background-color: $canvas_wrapper_bg_color;
 }
 
-$canvas_max_width:500px;
+$canvas_max_width: 500px;
 
 #canvas {
   background-color: $canvas_bg_color;
@@ -35,10 +35,10 @@ $canvas_max_width:500px;
   border-color: black;
   border-width: 3px;
   border-radius: 0.5rem;
-  z-index:1;
+  z-index: 1;
 }
 
-#input_wrapper{
+#input_wrapper {
   max-width: $canvas_max_width;
   background-color: $input_wrapper_bg_color;
   margin: auto;
@@ -52,7 +52,7 @@ $canvas_max_width:500px;
   font-size: 1.5rem;
   right: 77%;
   display: inline-block;
-  margin-left: 0. 5rem;
+  margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
 
@@ -62,7 +62,7 @@ $canvas_max_width:500px;
   display: inline-block;
 }
 
-#wrong_answer_hint{
+#wrong_answer_hint {
   display: none;
   position: absolute;
   background-color: red;
@@ -79,7 +79,7 @@ $canvas_max_width:500px;
   font-size: 3rem;
 }
 
-#wrong_answer_hint::first-letter{
+#wrong_answer_hint::first-letter {
   font-weight: bold;
 }
 
@@ -92,8 +92,8 @@ $canvas_max_width:500px;
   #canvas_wrapper {
     height: 65vh;
   }
-  .hide{
-    display:none;
+  .hide {
+    display: none;
   }
 
 }
@@ -102,41 +102,36 @@ $canvas_max_width:500px;
   background-color: $main_bg_color;
 }
 
-#speed_menu{
-display:none;
-}
-
-table{
-  .exam {
-    border-spacing: 0.25rem;
-    border-collapse: separate;
-    line-height: 1;
-    /* display: none; */
+.sub_menu {
+  background-color: cadetblue;
+  margin-bottom: 0.5rem;
+  span {
+    margin: 5px 5px 5px 5px;
+    color: white;
+    font-size: 1.2rem;
   }
-  
+
 }
 
-.hangul_row {
+#speed_menu {
+  display: none;
+}
+
+
+.letter_row {
   background-color: $main_bg_color;
   height: 95vh;
 }
 
-.hangul_col {
-  background-color: red;
-}
-
-
 
 .canvas_letter {
   position: absolute;
-  right:-100px;
+  right: -100px;
   font-size: 3rem;
   color: black;
   z-index: 0;
 
-
-  &.cleared{
-    
+  &.cleared {
     transition-property: opacity;
     transition-timing-function: ease;
     transition-duration: 1s;
@@ -144,55 +139,54 @@ table{
   }
 
 }
+
 div.red_text {
   transition-property: color;
   transition-timing-function: ease;
   transition-duration: 3500ms;
-  color:red;
+  color: red;
 }
 
-.btn{
+.btn {
   margin: 5px 5px 5px 5px;
 }
 
-.exam_row{
-  margin-left: 0;
+.exam_row {
+  margin-left: 0px;
 }
 
-.exam_item{
+.exam_item {
   display: inline;
 }
 
-.exam_box{
+.exam_box {
   border-radius: 3px;
   height: 12px;
   width: 12px;
   display: inline-block;
 
-  &.passed{
+  &.passed {
     transition-property: background-color;
     transition-duration: 500ms;
-    transition-timing-function:linear;
+    transition-timing-function: linear;
     background-color: green;
   }
 
-  &.failed{
+  &.failed {
     transition-property: background-color;
     transition-duration: 500ms;
-    transition-timing-function:linear;
+    transition-timing-function: linear;
     background-color: red;
   }
 
 }
 
-#exams{
-
+#exams {
   background-color: $main_bg_color;
-  display: none;
 
-  .exam{
+  .exam {
     background-color: lightblue;
-    display: flex;
+    display: none;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -204,36 +198,28 @@ div.red_text {
   }
 }
 
-
-#syllabus{
-  background-color: cadetblue;
+#choose_exam_menu {
   display: none;
-  margin-bottom: 0.5rem;
+}
 
-  button.active{
+#commands_menu {
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 5px 5px 5px;
+
+  button.active {
     border-width: 3px;
     border-color: black;
   }
 }
 
-#choose_exam{
-  span{
-    margin: 5px 5px 5px 5px;
-    color: white;
-    font-size: 1.2rem;
-  }
-  
+#syllabus_menu {
   display: none;
-  background-color: cadetblue;
-  margin-bottom: 0.5rem;
-}
 
-
-#commands{
-  background-color: cadetblue;
-  
-  button.active{
+  button.active {
     border-width: 3px;
     border-color: black;
   }
 }
+

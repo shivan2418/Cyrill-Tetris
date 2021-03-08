@@ -2,7 +2,7 @@ html, body {
   background-color: #17315c;
 }
 
-.hangul_container {
+.letter_container {
   background-color: #17315c;
   height: 90%;
   padding-top: 0.25rem;
@@ -32,12 +32,8 @@ html, body {
   background-color: #17315c;
   margin: auto;
   padding-top: 0.5rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
 
 #points, #block_speed {
@@ -80,36 +76,36 @@ html, body {
   #menu {
     height: 15vh;
   }
+
   #canvas_wrapper {
     height: 65vh;
   }
+
   .hide {
     display: none;
   }
 }
-
 #menu {
   background-color: #17315c;
+}
+
+.sub_menu {
+  background-color: cadetblue;
+  margin-bottom: 0.5rem;
+}
+.sub_menu span {
+  margin: 5px 5px 5px 5px;
+  color: white;
+  font-size: 1.2rem;
 }
 
 #speed_menu {
   display: none;
 }
 
-table .exam {
-  border-spacing: 0.25rem;
-  border-collapse: separate;
-  line-height: 1;
-  /* display: none; */
-}
-
-.hangul_row {
+.letter_row {
   background-color: #17315c;
   height: 95vh;
-}
-
-.hangul_col {
-  background-color: red;
 }
 
 .canvas_letter {
@@ -119,24 +115,17 @@ table .exam {
   color: black;
   z-index: 0;
 }
-
 .canvas_letter.cleared {
-  -webkit-transition-property: opacity;
   transition-property: opacity;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-transition-duration: 1s;
-          transition-duration: 1s;
+  transition-timing-function: ease;
+  transition-duration: 1s;
   opacity: 0;
 }
 
 div.red_text {
-  -webkit-transition-property: color;
   transition-property: color;
-  -webkit-transition-timing-function: ease;
-          transition-timing-function: ease;
-  -webkit-transition-duration: 3500ms;
-          transition-duration: 3500ms;
+  transition-timing-function: ease;
+  transition-duration: 3500ms;
   color: red;
 }
 
@@ -145,7 +134,7 @@ div.red_text {
 }
 
 .exam_row {
-  margin-left: 0;
+  margin-left: 0px;
 }
 
 .exam_item {
@@ -158,45 +147,28 @@ div.red_text {
   width: 12px;
   display: inline-block;
 }
-
 .exam_box.passed {
-  -webkit-transition-property: background-color;
   transition-property: background-color;
-  -webkit-transition-duration: 500ms;
-          transition-duration: 500ms;
-  -webkit-transition-timing-function: linear;
-          transition-timing-function: linear;
+  transition-duration: 500ms;
+  transition-timing-function: linear;
   background-color: green;
 }
-
 .exam_box.failed {
-  -webkit-transition-property: background-color;
   transition-property: background-color;
-  -webkit-transition-duration: 500ms;
-          transition-duration: 500ms;
-  -webkit-transition-timing-function: linear;
-          transition-timing-function: linear;
+  transition-duration: 500ms;
+  transition-timing-function: linear;
   background-color: red;
 }
 
 #exams {
   background-color: #17315c;
-  display: none;
 }
-
 #exams .exam {
   background-color: lightblue;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   border-width: 2px;
   border-color: black;
   border-style: solid;
@@ -204,35 +176,27 @@ div.red_text {
   margin-bottom: 0.2rem;
 }
 
-#syllabus {
-  background-color: cadetblue;
+#choose_exam_menu {
   display: none;
-  margin-bottom: 0.5rem;
 }
 
-#syllabus button.active {
-  border-width: 3px;
-  border-color: black;
-}
-
-#choose_exam {
-  display: none;
+#commands_menu {
   background-color: cadetblue;
-  margin-bottom: 0.5rem;
-}
-
-#choose_exam span {
+  display: flex;
+  flex-direction: column;
   margin: 5px 5px 5px 5px;
-  color: white;
-  font-size: 1.2rem;
 }
-
-#commands {
-  background-color: cadetblue;
-}
-
-#commands button.active {
+#commands_menu button.active {
   border-width: 3px;
   border-color: black;
 }
+
+#syllabus_menu {
+  display: none;
+}
+#syllabus_menu button.active {
+  border-width: 3px;
+  border-color: black;
+}
+
 /*# sourceMappingURL=styles.css.map */

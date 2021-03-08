@@ -23,8 +23,8 @@
 
 <body>
 
-  <div class='container hangul_container'>
-    <div class='row hangul_row'>
+  <div class='container letter_container'>
+    <div class='row letter_row'>
       <div id="canvas_wrapper" class='col-12 col-md-9 order-md-2'>
         <div id='wrong_answer_hint'>ㅊ:ch</div>
         <div id='canvas' class='mx-auto'></div>
@@ -36,7 +36,8 @@
       </div>
       <div id="menu" class='col-12 col-md-3 order-md-1'>
 
-        <div id="speed_menu">
+        <div class="sub_menu" id="speed_menu">
+          <span>Select speed</span>
           <button class='speed_btn btn btn-primary' data-speed=2000>Very fast (2s)</button>
           <button class='speed_btn btn btn-primary' data-speed=4000>Fast (4s)</button>
           <button class='speed_btn btn btn-primary' data-speed=7000>Normal (7s)</button>
@@ -45,29 +46,26 @@
           <button id='speed_custom' class='btn btn-primary'>Custom</button>
         </div>
 
-        <div id="choose_exam">
+        <div class="sub_menu" id="choose_exam_menu">
           <span>Select what exam to Take</span>
         </div>
 
-        <div id="syllabus">
-          <button class="btn btn-primary syllabus_btn active" id="btn_alphabet_full">Full alphabet
-          </button>
-          <button data-tooltip='Only letters that are not the same as western letters' class="btn btn-primary syllabus_btn"  id="btn_alphabet_hard_only">Foreign only</button>
+        <div class="sub_menu"  id=syllabus_menu>
+          <span>Select syllabus</span>
         </div>
 
-        <div id='commands'>
-          <button id="show_exams" class="btn btn-primary">Show exams</button>
-          <button id="endless_mode" class="active btn btn-primary">Endless mode</button>
-          <button id="exam_mode" class="inactive btn btn-primary">Take exam</button>
+        <div id='commands_menu'>
+          <button id="endless_mode_btn" class="active btn btn-primary">Endless mode</button>
+          <button id="exam_mode_btn" class="inactive btn btn-primary">Take exam</button>
           <button id="syllabus_btn" class="btn btn-primary">Syllabus</button>
           <button id="speed_btn" class="btn btn-primary">Adjust Speed</button>
-          <button id='challenge_mode' class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Challenge mode</button>
-          <input type='checkbox' checked=true value="1" id='show_hints'>
-          <label for='showhints'>Show hints on failure</label>
-          <button id="pause" class="btn btn-primary">Pause Game</button>
+          <button id="challenge_mode_btn" class="btn btn-primary" title="Increases speed as you progress">Challenge mode</button>
+          <input  id="show_hints_btn" type='checkbox' checked=true value="1" >
+          <label for='show_hints_btn'>Show hints on failure</label>
+          <button id="pause_btn" class="btn btn-primary">Pause Game</button>
         </div>
 
-        <div id='exams'>
+        <div id='exams' class="sub_menu" >
         </div>
 
 
