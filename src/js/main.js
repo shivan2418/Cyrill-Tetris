@@ -44,7 +44,7 @@ function start_exam_hard_only(){
 function _correct_input(char, block) {
 
     try {
-        return block.reading === char;
+        return block.reading.indexOf(char)!==-1        
     } catch {
         null;
     }
@@ -68,12 +68,11 @@ function evaluate_input(e) {
             if (correct) {
                 if (window.game.current_mode==='exam'){
                     window.game._increase_progress(letter.text());
-
-                }else{
+                }else if (window.game.current_mode==='endless'){
                     window.game.endless_points++;
                 }
                 
-            } else {
+            } else if (!correct) {
                 if (window.game.current_mode==='exam'){
                     window.game._decrease_progress(letter.text());
                 }else{
@@ -166,7 +165,6 @@ function toggle_syllabus(){
 
 function pause_game() {
     window.game.pause_game();
-
 }
 
 //add event listeners
@@ -187,6 +185,7 @@ document.getElementById("start_exam_hard_only").addEventListener('click', start_
 
 document.getElementById("speed_btn").addEventListener('click',toggle_speed);
 
+document.getElementById("show_hints").addEventListener('click',show_hints)
 
 $('.speed_btn').on('click',(e)=>{
     let speed = $(e.target).data('speed');

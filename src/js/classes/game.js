@@ -8,19 +8,20 @@ class Game {
 
     constructor(){
 
+      // state
       this.running = false;
-      this.endless_points = 0;
-      this.block_speed = BLOCK_SPEED;
-      this.blocks = [];
+      this.show_hints=true;
       this.current_mode = 'endless';
       this.current_exam = null;
-
-    
-      this.last_block_added_time = null;
-      this.last_blocked_added_in_round = 0;
       
-      this.letters_on_screen=0;
+      this.endless_points = 0;
 
+      this.block_speed = BLOCK_SPEED;
+      this.last_block_added_time = null;
+      this.last_blocked_added_in_round = 0;     
+      this.letters_on_screen=0;
+      this.blocks = [];
+    
       //exam
       this.exam_progress={};
 
@@ -38,9 +39,11 @@ class Game {
     
 
   static show_wrong_answer_hint(letter) {
+    if(this.show_hints){
       //Show a hint with the jamo and the reading. 
       $("#wrong_answer_hint").text(`${letter} : ${RU_TO_LAT_FULL[letter]}`);
       $("#wrong_answer_hint").fadeIn(HINT_FADEIN).delay(HINT_DELAY).fadeOut(HINT_FADEOUT);
+    }
   }
   
 
@@ -59,9 +62,17 @@ class Game {
 
           // If this letter has already been cleared then just do nothing.
           if (!$(this).hasClass('cleared')){
+            
             Game.show_wrong_answer_hint($(this).text());
             game.letters_on_screen--;
             game.blocks.shift();
+            
+            if(game.current_mode==='endless' && game.endless_points>0){
+              game.endless_points--;
+              game.update_state();
+            }else{
+              game._decrease_progress(letter.text());
+            }
             
           } 
           $(this).remove();         
