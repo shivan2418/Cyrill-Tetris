@@ -27,7 +27,7 @@ class Game {
         this.exam_progress = {};
 
         //syllabus
-        this.syllabus = RUS_ALL_LETTERS_FULL;
+        this.syllabus = null;
 
         // Constants
         this.MAX_BLOCKS_ON_SCREEN = 5; // max blocks at once on screen
@@ -41,37 +41,27 @@ class Game {
     show_wrong_answer_hint(letter) {
         if (this.show_hints) {
             //Show a hint with the jamo and the reading.
-            $("#wrong_answer_hint").text(`${letter} : ${RU_TO_LAT_FULL[letter]}`);
+            $("#wrong_answer_hint").text(`${letter} : ${this.syllabus[letter]}`);
             $("#wrong_answer_hint").fadeIn(HINT_FADEIN).delay(HINT_DELAY).fadeOut(HINT_FADEOUT);
         }
     }
 
     move_latest_letter() {
         let canvas = $("#canvas");
-        let letter = $("#canvas div:last-child");
+        let letter_block = $("#canvas div:last-child");
         let game = this;
-        letter.animate(
+        letter_block.animate(
             {
-                top: `${canvas.height() - letter.height()}px`
+                top: `${canvas.height() - letter_block.height()}px`
             },
             {
                 'duration': game.block_speed,
                 "done": function () {
                     // If this letter has already been cleared then just do nothing.
                     if (!$(this).hasClass('cleared')) {
-
-                        game.show_wrong_answer_hint($(this).text());
-                        game.letters_on_screen--;
-                        game.blocks.shift();
-
-                        if (game.current_mode === 'endless' && game.endless_points > 0) {
-                            game.endless_points--;
-                            game.update_state();
-                        } else {
-                            game._decrease_progress(letter.text());
-                        }
-
+                        game._decrease_progress(letter_block);
                     }
+                    //remove element from the dom no matter what
                     $(this).remove();
 
                 },
@@ -86,7 +76,7 @@ class Game {
     }
 
     add_letter_to_canvas(letter) {
-        let new_letter_block = new LetterBlock(letter);
+        let new_letter_block = new LetterBlock(letter,this.syllabus);
         console.log(`${new_letter_block.letter}:${new_letter_block.reading}`);
         this.blocks.push(new_letter_block);
         this.last_block_added_time = Math.floor(Date.now() / 1000);
@@ -109,7 +99,7 @@ class Game {
 
 
     choose_new_block_endless() {
-        return random_choice(this.syllabus);
+        return random_choice(Object.keys(this.syllabus));
     }
 
     choose_new_block_exam() {
@@ -142,7 +132,6 @@ class Game {
             } else {
                 this.exam_main_loop();
             }
-
         }, 250);
     }
 
@@ -160,7 +149,6 @@ class Game {
         if ((Math.floor(Date.now() / 1000) - this.last_block_added_time) < this.NEW_BLOCK_DELAY) {
             return;
         }
-
         let letter = this.choose_new_block_endless();
         this.add_letter_to_canvas(letter);
 
@@ -202,8 +190,6 @@ class Game {
         this.round = 0;
         this.last_blocked_added_in_round = 0;
         this.update_state();
-
-
     }
 
     pause_game() {
@@ -229,9 +215,25 @@ class Game {
         });
     }
 
-    _increase_progress(letter) {
+    _progress_cleanup() {
+        // upkeep that should happen no matter if if it was correct or wrong
+        this.blocks.shift();
+        if (this.letters_on_screen > 0) {
+            this.letters_on_screen--;
+        }
+        // if there are no more letters on the screen set the delay so that a new one can be added at once
+        if (this.letters_on_screen === 0) {
+            this.last_block_added_time = (Math.floor(Date.now() / 1000)) - 1000;
+        }
+        this.update_state();
+        //clear input from input box
+        $("input#letter_input").val("");
+    }
 
-
+    _increase_progress(letter_block) {
+        //add the cleared class to the letter so it is
+        letter_block.addClass('cleared');
+        let letter = letter_block.text();
         if (this.current_mode === 'exam') {
             if (this.exam_progress[letter] < 3) {
                 this.exam_progress[letter]++;
@@ -241,24 +243,42 @@ class Game {
                 first_failed.removeClass('failed');
                 first_failed.addClass('passed');
             }
-        }else if(this.current_mode==='endless'){
+        } else if (this.current_mode === 'endless') {
+            this.endless_points++;
+            if (this.challenge_mode){
+                this.block_speed-=100;
+            }
 
         }
-
-
+        this._progress_cleanup()
     }
 
-    _decrease_progress(letter) {
-        if (this.exam_progress[letter] > 0) {
-            this.exam_progress[letter]--;
+    _decrease_progress(letter_block) {
 
-            let first_element = $(`#${this.current_exam} #${letter}`);
-            let first_failed = $(first_element).siblings().filter(':not(.failed)').first()
-            first_failed.addClass('failed');
-            first_failed.removeClass('passed');
+        let letter = letter_block.text();
 
+        if (this.show_hints){
+            this.show_wrong_answer_hint(letter);
         }
 
+        if (this.current_mode === 'exam') {
+            if (this.exam_progress[letter] > 0) {
+                this.exam_progress[letter]--;
+                let first_element = $(`#${this.current_exam} #${letter}`);
+                let first_failed = $(first_element).siblings().filter(':not(.failed)').last()
+                first_failed.addClass('failed');
+                first_failed.removeClass('passed');
+            }
+        } else if (this.current_mode === 'endless') {
+            if (this.endless_points > 0) {
+                this.endless_points--;
+
+                if (this.challenge_mode){
+                    this.block_speed+=100;
+                }
+            }
+        }
+        this._progress_cleanup()
     }
 
 }

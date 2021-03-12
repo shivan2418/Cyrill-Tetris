@@ -5,11 +5,11 @@ var RU_TO_LAT_FULL = {
   "г": "g",
   "д": "d",
   "е": "e",
-  "ё": "yo",
-  "ж": "zh",
+ // "ё": "yo",
+  "ж": "zh, sh, s",
   "з": "z",
   "и": "i",
-  "й": "j",
+  "й": "y, ij",
   "к": "k",
   "л": "l",
   "м": "m",
@@ -17,22 +17,27 @@ var RU_TO_LAT_FULL = {
   "о": "o",
   "п": "p",
   "р": "r",
-  "с": "s",
+  "с": "s, c",
   "т": "t",
-  "у": "u",
+  "у": "u, oo",
   "ф": "f",
-  "х": "h",
-  "ц": "c",
+  "х": "kh, h",
+  "ц": "ts",
   "ч": "ch",
-  "ш": "sh",
-  "щ": "sz",
-  "ъ": "#",
+  "ш": "sh, ch",
+  "щ": "sz, sht",
+  "ъ": "ø, u, a,oe",
   "ы": "y",
-  "ь": "'",
-  "э": "eh",
-  "ю": "ju",
-  "я": "ja",
+  "ь": "j, y",
+//  "э": "eh",
+  "ю": "ju, yu",
+  "я": "ya, ja",
+//tilføjer lidt
+  "Б": "B, b", //jeg kan ikke finde det omvendt V som er et i, men nu er det rettet til.
+//  "Ѡ": ? Jeg gætter på w, men det bliver en anden dag.
 }
+
+
 
 var RU_TO_LAT_HARD_ONLY = {
   "б": "b",
@@ -65,8 +70,8 @@ var RU_TO_LAT_HARD_ONLY = {
   "я": "ja",
 }
 
-RUS_ALL_LETTERS_FULL = Array.from(Object.keys(RU_TO_LAT_FULL));
-RUS_ALL_LETTERS_HARD_ONLY = Array.from(Object.keys(RU_TO_LAT_HARD_ONLY));
+RUS_ALL_LETTERS_FULL = RU_TO_LAT_FULL;
+RUS_ALL_LETTERS_HARD_ONLY = RU_TO_LAT_HARD_ONLY;
 
 var SYLLABUS_DICT = {
   "RUS_ALL_LETTERS_FULL":RUS_ALL_LETTERS_FULL,

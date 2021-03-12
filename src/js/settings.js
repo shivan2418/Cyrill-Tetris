@@ -20,6 +20,6 @@ var MAX_BLOCKS_ON_SCREEN = 4
 
 // how many ms for a letter to drop from top to bottom
 var BLOCK_SPEED = 7000;
-var NEW_BLOCK_DELAY = 4;
+var NEW_BLOCK_DELAY =2;
 module.exports= {NEW_BLOCK_DELAY, XCOLS,COL_WIDTH,YROWS,ROW_HEIGHT,width,height,MAX_BLOCKS_ON_SCREEN,BLOCK_SPEED,HINT_FADEIN,HINT_FADEOUT,HINT_DELAY};
 

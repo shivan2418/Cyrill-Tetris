@@ -24,45 +24,24 @@ function _correct_input(char, block) {
 function evaluate_input(e) {
     // Only evaluate input on enter
     if (e.key === 'Enter' || e.key === 'NumpadEnter') {
-        //do nothing if no blocks on screen, just clear input
-        if (window.game.blocks.length === 0) {
-            $("input#letter_input").val("");
-        } else {
+
+        //if input in empty just do nothing
+        let input_value = $("input#letter_input").val();
+        if (input_value===""){
+            return;
+        }
+
+        //do nothing if no blocks on screen, just do nothing
+        if (window.game.blocks.length > 0) {
             let block = window.game.blocks[0];
-            let correct = _correct_input($("input#letter_input").val(), block);
-            // clear the input
-            $("input#letter_input").val("");
+            let correct = _correct_input(input_value, block);
             //Get first letter div that does not have the cleared tag
-            let letter = $('#canvas div:not(.cleared)').first();
-
+            let letter_block = $('#canvas div:not(.cleared)').first();
             if (correct) {
-                if (window.game.current_mode === 'exam') {
-                    window.game._increase_progress(letter.text());
-                } else if (window.game.current_mode === 'endless') {
-                    window.game.endless_points++;
-                }
-
+                window.game._increase_progress(letter_block);
             } else if (!correct) {
-                if (window.game.current_mode === 'exam') {
-                    window.game._decrease_progress(letter.text());
-                } else {
-                    if (window.game.endless_points > 0) {
-                        window.game.endless_points--;
-                    }
-                }
-                window.game.show_wrong_answer_hint(block.letter);
+                window.game._decrease_progress(letter_block);
             }
-
-            window.game.blocks.shift();
-            letter.addClass('cleared');
-            if (window.game.letters_on_screen >= 1) {
-                window.game.letters_on_screen--;
-            }
-            // if there are no more letters on the screen set the delay so that a new one can be added at once
-            if (window.game.letters_on_screen === 0) {
-                window.game.last_block_added_time = (Math.floor(Date.now() / 1000)) - 1000;
-            }
-            window.game.update_state();
         }
     }
 }
@@ -91,7 +70,7 @@ function create_exam(exam_name, letters) {
     $('#exams').append(new_exam);
 
     let base = "";
-    letters.forEach((letter_div) => {
+    Object.keys(letters).forEach((letter_div) => {
         base += `<div class="exam_row">
                      <div id=${letter_div} class="exam_item">${letter_div}</div>
                      <div id=${letter_div}0 class="exam_box failed"></div>
@@ -120,19 +99,19 @@ function toggle_endless() {
     window.game.current_mode = 'endless';
 }
 
-function toggle_speed() {
-    $("#speed_menu").toggle('fast');
+function toggle_options() {
+    $("#options_menu").toggle('fast');
 }
 
 function toggle_syllabus() {
     $("#syllabus_menu").toggle('fast');
 }
 
-function toggle_challenge_mode(){
+function toggle_challenge_mode() {
     window.game.challenge_mode = !window.game.challenge_mode;
-    if (window.game.challenge_mode){
+    if (window.game.challenge_mode) {
         $("#challenge_mode_btn").addClass('active')
-    }else{
+    } else {
         $("#challenge_mode_btn").removeClass('active')
     }
 }
@@ -149,18 +128,15 @@ function toggle_show_hints() {
 document.getElementById('endless_mode_btn').addEventListener('click', toggle_endless);
 document.getElementById('exam_mode_btn').addEventListener('click', toggle_exam);
 document.getElementById('pause_btn').addEventListener('click', pause_game);
-
 document.getElementById('syllabus_btn').addEventListener('click', toggle_syllabus);
+document.getElementById("options_btn").addEventListener('click', toggle_options);
+document.getElementById('challenge_mode_btn').addEventListener('click', toggle_challenge_mode)
+
 document.getElementById("letter_input").addEventListener('keydown', evaluate_input);
-
-document.getElementById("speed_btn").addEventListener('click', toggle_speed);
-
-document.getElementById('challenge_mode_btn').addEventListener('click',toggle_challenge_mode)
 
 $('.speed_btn').on('click', (e) => {
     let speed = $(e.target).data('speed');
     window.game._set_blockspeed(speed);
-    $('#speed_menu').hide('fast');
 });
 
 
@@ -168,11 +144,15 @@ $('#speed_custom').on('click', (e) => {
     let speed = window.prompt('Enter how many seconds you have to answer');
     if (speed !== null && speed !== "" && parseFloat(speed) >= 0.1) ;
     window.game._set_blockspeed(parseFloat(speed) * 1000);
-    $("#speed_menu").hide('fast');
+
 });
 
-$('#show_hints').on('change', (e) => {
+$('#show_hints_btn').on('change', (e) => {
     toggle_show_hints()
+})
+
+$("#block_delay_slider").on('input',(e)=>{
+  console.log(e.target.value);
 })
 
 
@@ -188,13 +168,14 @@ $(document).ready(function () {
         $('#syllabus_menu').hide('fast');
     });
 
-    $('.choose_exam').on('click',(e)=>{
+    $('.choose_exam').on('click', (e) => {
         let exam_name = $(e.target).data('name');
         let syl = SYLLABUS_DICT[exam_name];
         window.game._set_syllabus(syl);
-
-        $(`#${exam_name}`).css('display','flex');
-
+        window.game.current_mode='exam';
+        window.game.current_exam=exam_name;
+        window.game._reset_exam_progress();
+        $(`#${exam_name}`).css('display', 'flex');
         $("#exam_mode_btn").addClass('active');
         $("#endless_mode_btn").removeClass('active');
         $("#choose_exam_menu").hide('fast');
@@ -205,5 +186,6 @@ $(document).ready(function () {
     window.game = new Game();
     window.game.start_game();
     //start the main loop
+    window.game._set_syllabus(RUS_ALL_LETTERS_FULL)
     window.game.main_loop();
 });
